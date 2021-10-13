@@ -1,23 +1,43 @@
-import PropTypes from 'prop-types';
-import style from './Searchbar.module.css';
+// import PropTypes from 'prop-types';
+import { Component } from 'react';
+// import style from './Searchbar.module.css';
 
-const Searchbar = ({ search, onChangeSearch }) => {
-  return (
-    <div className={style.searchbar}>
-      <input
-        className={style.searchForm}
-        type="text"
-        name="search"
-        onChange={onChangeSearch}
-        value={search}
-      ></input>
-    </div>
-  );
-};
+/*= ({ search, onChangeSearch }) =>*/
+export default class Searchbar extends Component {
+  state = {
+    searchValue: '',
+  };
 
-Searchbar.protoType = {
-  search: PropTypes.string,
-  onChangeSearch: PropTypes.func,
-};
+  handleSearchInput = event => {
+    this.setState({
+      searchValue: event.currentTarget.value.trim().toLocaleLowerCase(),
+    });
+    // console.log(event.currentTarget.value);
+  };
 
-export default Searchbar;
+  handleSabmit = event => {
+    event.preventDefualt();
+
+    this.props.searchQuery(this.state.searchValue);
+
+    this.setState({ searchValue: '' });
+  };
+
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="search"
+          onChange={this.handleSearchInput}
+          value={this.state.searchValue}
+        ></input>
+      </div>
+    );
+  }
+}
+
+// Searchbar.protoType = {
+//   search: PropTypes.string,
+//   onChangeSearch: PropTypes.func,
+// };
