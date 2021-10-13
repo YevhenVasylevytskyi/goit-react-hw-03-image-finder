@@ -1,4 +1,4 @@
-@import-normalize;
+/* @import-normalize; */
 
 html {
   box-sizing: border-box;
@@ -39,7 +39,7 @@ code {
   padding-bottom: 24px;
 }
 
-/* ul,
+ul,
 li,
 h2,
 p {
@@ -58,4 +58,4 @@ img {
   display: block;
   max-width: 100%;
   height: auto;
-} */
+}
