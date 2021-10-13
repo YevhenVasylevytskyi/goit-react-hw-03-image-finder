@@ -1,19 +1,23 @@
-// import style from './Searchbar.module.css';
+import PropTypes from 'prop-types';
+import style from './Searchbar.module.css';
 
 const Searchbar = ({ search, onChangeSearch }) => {
   return (
-    <input
-      type="text"
-      name="search"
-      onChange={onChangeSearch}
-      value={search}
-    ></input>
+    <div className={style.searchbar}>
+      <input
+        className={style.searchForm}
+        type="text"
+        name="search"
+        onChange={onChangeSearch}
+        value={search}
+      ></input>
+    </div>
   );
 };
 
-// Search.protoType = {
-//   search: PropTypes.string,
-//   onChangeSearch: PropTypes.func,
-// };
+Searchbar.protoType = {
+  search: PropTypes.string,
+  onChangeSearch: PropTypes.func,
+};
 
 export default Searchbar;
