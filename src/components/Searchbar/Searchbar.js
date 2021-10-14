@@ -5,7 +5,6 @@ import { ImSearch } from 'react-icons/im';
 import { toast } from 'react-toastify';
 // import style from './Searchbar.module.css';
 
-/*= ({ search, onChangeSearch }) =>*/
 export default class Searchbar extends Component {
   state = {
     inputValue: '',
@@ -55,23 +54,6 @@ export default class Searchbar extends Component {
           />
         </form>
       </header>
-      // <form onSubmit={this.handleSubmit}>
-      //   <input
-      //     type="text"
-      //     name="inputValue"
-      //     value={this.state.inputValue}
-      //     onChange={this.handleSearchInput}
-      //   />
-      //   <button type="submit">
-      //     <ImSearch />
-      //     Search
-      //   </button>
-      // </form>
     );
   }
 }
-
-// Searchbar.protoType = {
-//   search: PropTypes.string,
-//   onChangeSearch: PropTypes.func,
-// };
