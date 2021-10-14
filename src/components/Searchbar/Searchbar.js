@@ -34,18 +34,39 @@ export default class Searchbar extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          name="inputValue"
-          value={this.state.inputValue}
-          onChange={this.handleSearchInput}
-        />
-        <button type="submit">
-          <ImSearch />
-          Search
-        </button>
-      </form>
+      <header className="Searchbar" onSubmit={this.handleSubmit}>
+        <form className="SearchForm">
+          <button type="submit" className="SearchForm-button">
+            <span className="SearchForm-button-label">
+              <ImSearch />
+              Search
+            </span>
+          </button>
+
+          <input
+            className="SearchForm-input"
+            name="inputValue"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            value={this.state.inputValue}
+            onChange={this.handleSearchInput}
+          />
+        </form>
+      </header>
+      // <form onSubmit={this.handleSubmit}>
+      //   <input
+      //     type="text"
+      //     name="inputValue"
+      //     value={this.state.inputValue}
+      //     onChange={this.handleSearchInput}
+      //   />
+      //   <button type="submit">
+      //     <ImSearch />
+      //     Search
+      //   </button>
+      // </form>
     );
   }
 }
