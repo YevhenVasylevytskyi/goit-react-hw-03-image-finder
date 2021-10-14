@@ -1,38 +1,51 @@
+import React from 'react';
 // import PropTypes from 'prop-types';
 import { Component } from 'react';
+import { ImSearch } from 'react-icons/im';
+import { toast } from 'react-toastify';
 // import style from './Searchbar.module.css';
 
 /*= ({ search, onChangeSearch }) =>*/
 export default class Searchbar extends Component {
   state = {
-    searchValue: '',
+    inputValue: '',
   };
 
   handleSearchInput = event => {
     this.setState({
-      searchValue: event.currentTarget.value.trim().toLocaleLowerCase(),
+      inputValue: event.currentTarget.value.trim().toLocaleLowerCase(),
     });
     // console.log(event.currentTarget.value);
   };
 
-  handleSabmit = event => {
-    event.preventDefualt();
+  handleSubmit = event => {
+    event.preventDefault();
 
-    this.props.searchQuery(this.state.searchValue);
+    if (this.state.inputValue.trim() === '') {
+      toast.error('Введите название картинки');
+      return;
+    }
 
-    this.setState({ searchValue: '' });
+    this.props.searchPictures(this.state.inputValue);
+    toast.success('Приятного просмотра');
+
+    this.setState({ inputValue: '' });
   };
 
   render() {
     return (
-      <div>
+      <form onSubmit={this.handleSubmit}>
         <input
           type="text"
-          name="search"
+          name="inputValue"
+          value={this.state.inputValue}
           onChange={this.handleSearchInput}
-          value={this.state.searchValue}
-        ></input>
-      </div>
+        />
+        <button type="submit">
+          <ImSearch />
+          Search
+        </button>
+      </form>
     );
   }
 }
