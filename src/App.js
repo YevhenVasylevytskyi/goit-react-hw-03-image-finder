@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Container from './components/Container/Container';
 import Searchbar from './components/Searchbar/Searchbar';
-import ImageGallery from 'components/ImageGallery/ImageGallery';
+import ImageGallery from './components/ImageGallery/ImageGallery';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

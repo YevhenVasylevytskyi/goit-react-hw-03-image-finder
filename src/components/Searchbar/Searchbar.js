@@ -3,7 +3,7 @@ import React from 'react';
 import { Component } from 'react';
 import { ImSearch } from 'react-icons/im';
 import { toast } from 'react-toastify';
-// import style from './Searchbar.module.css';
+import style from './Searchbar.module.css';
 
 export default class Searchbar extends Component {
   state = {
@@ -33,17 +33,17 @@ export default class Searchbar extends Component {
 
   render() {
     return (
-      <header className="Searchbar" onSubmit={this.handleSubmit}>
-        <form className="SearchForm">
-          <button type="submit" className="SearchForm-button">
-            <span className="SearchForm-button-label">
+      <header className={style.Searchbar} onSubmit={this.handleSubmit}>
+        <form className={style.SearchForm}>
+          <button type="submit" className={style.SearchForm_button}>
+            <span className={style.SearchForm_button_label}>
               <ImSearch />
               Search
             </span>
           </button>
 
           <input
-            className="SearchForm-input"
+            className={style.SearchForm_input}
             name="inputValue"
             type="text"
             autoComplete="off"
