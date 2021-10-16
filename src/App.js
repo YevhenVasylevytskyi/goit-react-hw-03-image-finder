@@ -5,7 +5,7 @@ import ImageGallery from './components/ImageGallery/ImageGallery';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-class App extends Component {
+export default class App extends Component {
   state = {
     searchQuery: '',
   };
@@ -36,5 +36,3 @@ class App extends Component {
     );
   }
 }
-
-export default App;

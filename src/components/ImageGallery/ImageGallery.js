@@ -2,11 +2,21 @@ import { Component } from 'react';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import Button from '../Button/Button';
 import ApiService from '../../services/ApiService';
+import Loader from '../Loader/Loader';
+import SerchError from '../SearchError/SearchError';
 import style from './ImageGallery.module.css';
+
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
 
 export default class ImageGallery extends Component {
   state = {
     cards: [],
+    status: Status.IDLE,
     page: 1,
   };
 
@@ -15,6 +25,7 @@ export default class ImageGallery extends Component {
     const nextSearch = this.props.searchQuery;
 
     if (prevSearch !== nextSearch) {
+      this.setState({ status: Status.PENDING });
       //   console.log('prevProps.searchQuery:', prevProps.searchQuery);
       //   console.log('this.props.searchQuery:', this.props.searchQuery);
       //   console.log('Изменился запрос');
@@ -23,6 +34,7 @@ export default class ImageGallery extends Component {
         if (result.hits.length !== 0) {
           return this.setState({
             cards: result.hits,
+            status: 'resolved',
             page: 1,
           });
         }
@@ -36,12 +48,14 @@ export default class ImageGallery extends Component {
   loadMore = () => {
     const nextSearch = this.props.searchQuery;
     const { page } = this.state;
+    this.setState({ status: 'pending' });
 
     ApiService(nextSearch, page + 1)
       .then(result => {
         return this.setState(prevState => {
           return {
             cards: [...prevState.cards, ...result.hits],
+            status: 'resolved',
             page: prevState.page + 1,
           };
         });
@@ -56,18 +70,43 @@ export default class ImageGallery extends Component {
   };
 
   render() {
-    return (
-      <div>
-        {this.state.cards && (
-          <>
-            <ul className={style.ImageGallery}>
-              <ImageGalleryItem cards={this.state.cards} />
-            </ul>
+    const { cards, status } = this.state;
 
-            <Button loadMore={this.loadMore} />
-          </>
-        )}
-      </div>
-    );
+    const { searchQuery } = this.props;
+
+    if (status === 'idle') {
+      return <div className={style.idle}>Введите запрос поиска.</div>;
+    }
+
+    if (status === 'pending') {
+      return (
+        <>
+          <ul className={style.ImageGallery}>
+            <ImageGalleryItem cards={cards} />
+          </ul>
+          <Loader />
+        </>
+      );
+    }
+
+    if (status === 'rejected') {
+      return <SerchError message={searchQuery} />;
+    }
+
+    if (status === 'resolved') {
+      return (
+        <div>
+          {cards && (
+            <>
+              <ul className={style.ImageGallery}>
+                <ImageGalleryItem cards={cards} />
+              </ul>
+
+              <Button loadMore={this.loadMore} />
+            </>
+          )}
+        </div>
+      );
+    }
   }
 }
