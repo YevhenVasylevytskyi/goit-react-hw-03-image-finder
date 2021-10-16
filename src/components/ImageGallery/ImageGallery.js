@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import ApiService from '../../services/ApiService';
 import Loader from '../Loader/Loader';
 import SerchError from '../SearchError/SearchError';
+import PropTypes from 'prop-types';
 import style from './ImageGallery.module.css';
 
 const Status = {
@@ -61,10 +62,12 @@ export default class ImageGallery extends Component {
         });
       })
       .finally(() => {
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: 'smooth',
-        });
+        setTimeout(() => {
+          window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth',
+          });
+        }, 100);
       });
     // console.log("this.state.page", this.state.page);
   };
@@ -75,7 +78,7 @@ export default class ImageGallery extends Component {
     const { searchQuery } = this.props;
 
     if (status === 'idle') {
-      return <div className={style.idle}>Введите запрос поиска.</div>; //Добавить стиль
+      return <div className={style.Idle}>Введите запрос поиска.</div>; //Добавить стиль
     }
 
     if (status === 'pending') {
@@ -110,3 +113,7 @@ export default class ImageGallery extends Component {
     }
   }
 }
+
+ImageGallery.protoType = {
+  searchQuery: PropTypes.string,
+};

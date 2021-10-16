@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import Modal from '../Modal/Modal';
+import PropTypes from 'prop-types';
 import style from './ImageGalleryItem.module.css';
 
 export default class ImageGalleryItem extends Component {
@@ -57,3 +58,7 @@ export default class ImageGalleryItem extends Component {
     );
   }
 }
+
+ImageGalleryItem.protoType = {
+  cards: PropTypes.array,
+};
