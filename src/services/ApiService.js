@@ -12,5 +12,6 @@ export default function ApiService(searchQuery, page) {
     })
     .then(result => {
       return result;
-    });
+    })
+    .catch(error => console.warn(error));
 }

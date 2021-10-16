@@ -8,6 +8,13 @@ import 'react-toastify/dist/ReactToastify.css';
 export default class App extends Component {
   state = {
     searchQuery: '',
+    showModal: false,
+  };
+
+  toggleModal = () => {
+    this.setState(({ showModal }) => ({
+      showModal: !showModal,
+    }));
   };
 
   handlesearchQuery = searchQuery => {
@@ -16,10 +23,11 @@ export default class App extends Component {
   };
 
   render() {
+    const { searchQuery } = this.state;
     return (
       <Container>
         <Searchbar searchPictures={this.handlesearchQuery} />
-        <ImageGallery searchQuery={this.state.searchQuery} />
+        <ImageGallery searchQuery={searchQuery} />
 
         <ToastContainer
           position="top-right"

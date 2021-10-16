@@ -39,7 +39,7 @@ export default class ImageGallery extends Component {
           });
         }
 
-        return this.setState({ cards: result.hits });
+        return this.setState({ cards: result.hits, status: 'rejected' });
       });
     }
     //   console.log(this.state.cards);
@@ -75,7 +75,7 @@ export default class ImageGallery extends Component {
     const { searchQuery } = this.props;
 
     if (status === 'idle') {
-      return <div className={style.idle}>Введите запрос поиска.</div>;
+      return <div className={style.idle}>Введите запрос поиска.</div>; //Добавить стиль
     }
 
     if (status === 'pending') {
